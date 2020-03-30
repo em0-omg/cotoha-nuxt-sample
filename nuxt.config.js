@@ -86,5 +86,9 @@ export default {
     GRANT_TYPE,
     CLIENT_ID,
     CLIENT_SECRET
+  },
+  server: {
+    port: 2524, // デフォルト: 3000
+    host: "0.0.0.0" // デフォルト: localhost
   }
 };
