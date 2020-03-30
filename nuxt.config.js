@@ -89,6 +89,6 @@ export default {
   },
   server: {
     port: 2524, // デフォルト: 3000
-    host: "0.0.0.0" // デフォルト: localhost
+    host: "localhost" // デフォルト: localhost
   }
 };
