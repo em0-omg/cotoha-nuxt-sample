@@ -3,10 +3,10 @@
     <v-card>
       <v-container>
         <v-card-title>最初に</v-card-title>
-        <v-card-text>右のボタンでアクセストークンを取得してください.</v-card-text>
-        <v-card-subtitle>ワンタイムトークンなので他の誰かがトークンを取得しなおすとエラーが出ます。その場合、再度取得が必要になります。</v-card-subtitle>
+        <v-card-subtitle>ワンタイムトークンなので他の誰かがトークンを取得しなおすとエラーが出ます。画面を更新するとトークンを再発行します。</v-card-subtitle>
         <v-card-subtitle>また無料アカウントのため1日100リクエスト程で停止してしまいます。</v-card-subtitle>
 
+        <!--
         <v-card-actions>
           <v-spacer />
           <template v-if="loading">
@@ -16,6 +16,7 @@
             <v-btn @click="getAccessToken">GET TOKEN</v-btn>
           </template>
         </v-card-actions>
+        -->
         <v-layout justify-center>{{ accessToken }}</v-layout>
       </v-container>
     </v-card>
@@ -104,8 +105,13 @@ export default {
     RemoveFilter: () => import("~/components/RemoveFilter"),
     Summary: () => import("~/components/Summary")
   },
+  mounted() {
+    console.log("mounted");
+    this.getAccessToken();
+    console.log("token get", this.accessToken);
+  },
   methods: {
-    getAccessToken(nippo) {
+    getAccessToken() {
       this.loading = true;
       const userData = {
         grantType: process.env.GRANT_TYPE,
