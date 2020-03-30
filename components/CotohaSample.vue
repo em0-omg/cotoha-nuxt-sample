@@ -3,23 +3,14 @@
     <v-card>
       <v-container>
         <v-card-title>最初に</v-card-title>
-        <v-card-text
-          >右のボタンでアクセストークンを取得してください.</v-card-text
-        >
-        <v-card-subtitle
-          >ワンタイムトークンなので他の誰かがトークンを取得しなおすとエラーが出ます。その場合、再度取得が必要になります。</v-card-subtitle
-        >
-        <v-card-subtitle>
-          また無料アカウントのため1日100リクエスト程で停止してしまいます。
-        </v-card-subtitle>
+        <v-card-text>右のボタンでアクセストークンを取得してください.</v-card-text>
+        <v-card-subtitle>ワンタイムトークンなので他の誰かがトークンを取得しなおすとエラーが出ます。その場合、再度取得が必要になります。</v-card-subtitle>
+        <v-card-subtitle>また無料アカウントのため1日100リクエスト程で停止してしまいます。</v-card-subtitle>
 
         <v-card-actions>
           <v-spacer />
           <template v-if="loading">
-            <v-progress-circular
-              indeterminate
-              color="primary"
-            ></v-progress-circular>
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>
           </template>
           <template v-else>
             <v-btn @click="getAccessToken">GET TOKEN</v-btn>
@@ -122,7 +113,11 @@ export default {
         clientSecret: process.env.CLIENT_SECRET
       };
       this.$axios
-        .post(`https://api.ce-cotoha.com/v1/oauth/accesstokens`, userData)
+        .post(`https://api.ce-cotoha.com/v1/oauth/accesstokens`, userData, {
+          headers: {
+            "Access-Control-Allow-Origin": "*"
+          }
+        })
         .then(response => {
           this.accessToken = response.data.access_token;
         })
