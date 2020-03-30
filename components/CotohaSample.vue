@@ -2,10 +2,17 @@
   <div>
     <v-card>
       <v-container>
-        <v-card-title>
-          First Step.
-        </v-card-title>
-        <v-card-text>Get COTOHA access token.</v-card-text>
+        <v-card-title>最初に</v-card-title>
+        <v-card-text
+          >右のボタンでアクセストークンを取得してください.</v-card-text
+        >
+        <v-card-subtitle
+          >ワンタイムトークンなので他の誰かがトークンを取得しなおすとエラーが出ます。その場合、再度取得が必要になります。</v-card-subtitle
+        >
+        <v-card-subtitle>
+          また無料アカウントのため1日100リクエスト程で停止してしまいます。
+        </v-card-subtitle>
+
         <v-card-actions>
           <v-spacer />
           <template v-if="loading">
@@ -18,27 +25,78 @@
             <v-btn @click="getAccessToken">GET TOKEN</v-btn>
           </template>
         </v-card-actions>
-        <v-layout justify-center>
-          {{ accessToken }}
-        </v-layout>
+        <v-layout justify-center>{{ accessToken }}</v-layout>
       </v-container>
     </v-card>
     <br />
-    <Sentiment :token="accessToken" />
-    <Parse :token="accessToken" />
-    <Ne :token="accessToken" />
-    <Coreference :token="accessToken" />
-    <Keyword :token="accessToken" />
-    <Sim :token="accessToken" />
-    <SentenceType :token="accessToken" />
-    <AttributeVue :token="accessToken" />
-    <RemoveFilter :token="accessToken" />
+    <Sentiment :token="accessToken" id="sentiment" />
+    <Parse :token="accessToken" id="parse" />
+    <Ne :token="accessToken" id="ne" />
+    <Coreference :token="accessToken" id="coreference" />
+    <Keyword :token="accessToken" id="keyword" />
+    <Sim :token="accessToken" id="sim" />
+    <SentenceType :token="accessToken" id="sentencetype" />
+    <AttributeVue :token="accessToken" id="attr" />
+    <RemoveFilter :token="accessToken" id="removefilter" />
+    <Summary :token="accessToken" id="summary" />
+    <v-bottom-navigation v-model="bottomNav" fixed>
+      <v-btn value="sentiment" v-scroll-to="'#sentiment'">
+        <span>感情分析</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="parse" v-scroll-to="'#parse'">
+        <span>構文解析</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="ne" v-scroll-to="'#ne'">
+        <span>固有表現</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="coreference" v-scroll-to="'#coreference'">
+        <span>照応解析</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="keyword" v-scroll-to="'#keyword'">
+        <span>キーワード</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="sim" v-scroll-to="'#sim'">
+        <span>類似度</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="sentencetype" v-scroll-to="'#sentencetype'">
+        <span>文タイプ</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="attibute" v-scroll-to="'#attr'">
+        <span>ユーザ属性</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="removefilter" v-scroll-to="'#removefilter'">
+        <span>淀み除去</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+
+      <v-btn value="summary" v-scroll-to="'#summary'">
+        <span>要約</span>
+        <v-icon>mdi-check-circle</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </div>
 </template>
 <script>
 export default {
   data: () => {
     return {
+      bottomNav: "sentiment",
       accessToken: "",
       loading: false
     };
@@ -52,7 +110,8 @@ export default {
     Sim: () => import("~/components/Sim"),
     SentenceType: () => import("~/components/SentenceType"),
     AttributeVue: () => import("~/components/Attribute"),
-    RemoveFilter: () => import("~/components/RemoveFilter")
+    RemoveFilter: () => import("~/components/RemoveFilter"),
+    Summary: () => import("~/components/Summary")
   },
   methods: {
     getAccessToken(nippo) {
@@ -69,6 +128,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.result = e;
         });
       this.loading = false;
     }

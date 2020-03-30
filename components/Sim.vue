@@ -1,22 +1,17 @@
 <template>
   <v-card v-if="token.length > 0">
     <v-container>
-      <v-card-text> 6. 類似度算出 </v-card-text>
+      <v-card-text>6. 類似度算出</v-card-text>
+      <v-card-subtitle
+        >テキスト間の意味的な類似度を算出・出力します。</v-card-subtitle
+      >
       <v-row>
-        <v-col cols="6"
-          ><v-textarea
-            outlined
-            label="INPUT 1 TEXT"
-            v-model="sentence1"
-          ></v-textarea
-        ></v-col>
-        <v-col cols="6"
-          ><v-textarea
-            outlined
-            label="INPUT 2 TEXT"
-            v-model="sentence2"
-          ></v-textarea
-        ></v-col>
+        <v-col cols="6">
+          <v-textarea outlined label="入力1" v-model="sentence1"></v-textarea>
+        </v-col>
+        <v-col cols="6">
+          <v-textarea outlined label="入力2" v-model="sentence2"></v-textarea>
+        </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
@@ -75,6 +70,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.result = e;
         });
     }
   }

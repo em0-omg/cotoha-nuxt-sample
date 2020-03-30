@@ -1,15 +1,14 @@
 <template>
   <v-card v-if="token.length > 0">
     <v-container>
-      <v-card-text> 3. 固有表現抽出 </v-card-text>
+      <v-card-text>3. 固有表現抽出</v-card-text>
+      <v-card-subtitle
+        >人名や地名、日付表現(時間、日付)、組織名、量的表現(金額、割合)、人工物の8種類の固有表現と、200種類以上のクラス数を持つ拡張固有表現を出力します。</v-card-subtitle
+      >
       <v-row>
-        <v-col cols="6"
-          ><v-textarea
-            outlined
-            label="INPUT TEXT"
-            v-model="sentence"
-          ></v-textarea
-        ></v-col>
+        <v-col cols="6">
+          <v-textarea outlined label="入力" v-model="sentence"></v-textarea>
+        </v-col>
         <v-col cols="6">
           {{ result }}
           <br />
@@ -62,6 +61,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.result = e;
         });
     }
   }

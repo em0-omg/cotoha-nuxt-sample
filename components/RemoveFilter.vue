@@ -1,16 +1,14 @@
 <template>
   <v-card v-if="token.length > 0">
     <v-container>
-      <v-card-text> 9. 言い淀み除去 </v-card-text>
-      <v-card-subtitle></v-card-subtitle>
+      <v-card-text>9. 言い淀み除去</v-card-text>
+      <v-card-subtitle
+        >音声認識処理後のテキストに対して、ユーザからの音声入力時に含まれる言い淀みを除去します。</v-card-subtitle
+      >
       <v-row>
-        <v-col cols="6"
-          ><v-textarea
-            outlined
-            label="INPUT 1 TEXT"
-            v-model="sentence"
-          ></v-textarea
-        ></v-col>
+        <v-col cols="6">
+          <v-textarea outlined label="入力" v-model="sentence"></v-textarea>
+        </v-col>
         <v-col cols="6">
           {{ result }}
           <br />
@@ -68,6 +66,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.result = e;
         });
     }
   }

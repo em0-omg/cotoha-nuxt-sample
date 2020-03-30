@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h2>COTOHA SAMPLE</h2>
+    <h2>自然言語処理 デモ ( COTOHA API )</h2>
     <br />
     <CotohaSample />
   </v-container>

@@ -1,16 +1,15 @@
 <template>
   <v-card v-if="token.length > 0">
     <v-container>
-      <v-card-title>Samples</v-card-title>
-      <v-card-text> 1. Sentiment </v-card-text>
+      <v-card-title>API一覧</v-card-title>
+      <v-card-text>1. 感情分析</v-card-text>
+      <v-card-subtitle
+        >そのテキストの書き手の感情(ネガティブ・ポジティブ)を判定します。</v-card-subtitle
+      >
       <v-row>
-        <v-col cols="6"
-          ><v-textarea
-            outlined
-            label="INPUT TEXT"
-            v-model="sentence"
-          ></v-textarea
-        ></v-col>
+        <v-col cols="6">
+          <v-textarea outlined label="入力" v-model="sentence"></v-textarea>
+        </v-col>
         <v-col cols="6">
           {{ result }}
           <br />
@@ -63,6 +62,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.result = e;
         });
     }
   }

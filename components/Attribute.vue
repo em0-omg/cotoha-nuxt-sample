@@ -1,18 +1,14 @@
 <template>
   <v-card v-if="token.length > 0">
     <v-container>
-      <v-card-text> 8. ユーザ属性推定 </v-card-text>
+      <v-card-text>8. ユーザ属性推定</v-card-text>
       <v-card-subtitle
-        >*年代、性別、趣味、職業などの人物に関する属性を推定・出力します。
-      </v-card-subtitle>
+        >年代、性別、趣味、職業などの人物に関する属性を推定・出力します。</v-card-subtitle
+      >
       <v-row>
-        <v-col cols="6"
-          ><v-textarea
-            outlined
-            label="INPUT 1 TEXT"
-            v-model="sentence"
-          ></v-textarea
-        ></v-col>
+        <v-col cols="6">
+          <v-textarea outlined label="入力" v-model="sentence"></v-textarea>
+        </v-col>
         <v-col cols="6">
           {{ result }}
           <br />
@@ -69,6 +65,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.result = e;
         });
     }
   }

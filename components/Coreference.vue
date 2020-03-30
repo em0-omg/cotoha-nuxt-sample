@@ -1,20 +1,14 @@
 <template>
   <v-card v-if="token.length > 0">
     <v-container>
-      <v-card-text>
-        4. 照応解析
-      </v-card-text>
-      <v-card-subtitle>
-        *テキスト中の「そこ」「それ」などの指示詞や「彼」「彼女」などの代名詞と対応する先行詞を抽出
-      </v-card-subtitle>
+      <v-card-text>4. 照応解析</v-card-text>
+      <v-card-subtitle
+        >テキスト中の「そこ」「それ」などの指示詞や「彼」「彼女」などの代名詞と対応する先行詞を抽出</v-card-subtitle
+      >
       <v-row>
-        <v-col cols="6"
-          ><v-textarea
-            outlined
-            label="INPUT TEXT"
-            v-model="sentence"
-          ></v-textarea
-        ></v-col>
+        <v-col cols="6">
+          <v-textarea outlined label="入力" v-model="sentence"></v-textarea>
+        </v-col>
         <v-col cols="6">
           {{ result }}
           <br />
@@ -67,6 +61,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          this.result = e;
         });
     }
   }
