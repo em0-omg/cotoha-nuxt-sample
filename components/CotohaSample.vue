@@ -113,11 +113,7 @@ export default {
         clientSecret: process.env.CLIENT_SECRET
       };
       this.$axios
-        .post(`https://api.ce-cotoha.com/v1/oauth/accesstokens`, userData, {
-          headers: {
-            "Access-Control-Allow-Origin": "*"
-          }
-        })
+        .post(`https://api.ce-cotoha.com/v1/oauth/accesstokens`, userData)
         .then(response => {
           this.accessToken = response.data.access_token;
         })
