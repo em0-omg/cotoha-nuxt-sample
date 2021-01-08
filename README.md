@@ -1,5 +1,12 @@
 # cotoha-nuxt-sample
 
+COTOHA APIを体験するためのサンプルプロジェクト
+
+COTOHA APIで用意されている機能を一通り試すことができます。
+> https://api.ce-cotoha.com/contents/api-all.html
+
+※登録が必要です
+
 > My mathematical Nuxt.js project
 
 ## Build Setup
